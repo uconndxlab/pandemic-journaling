@@ -1,3 +1,60 @@
 body {
-    background: red;
+    background: white;
+}
+
+.btn-warning {
+    color: black;
+}
+
+.btn {
+    font-weight: 600;
+}
+
+.custom-purple {
+    background-color: #412D4E;
+    color: white;
+    
+}
+
+.custom-purple:hover {
+    background-color: #261b2e; 
+    color: white
+  }
+
+.form-check {
+    margin-bottom: 20px
+}
+
+p .card-text {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+#paragraph {
+    text-indent: 25px;
+ }
+
+h4 {
+    margin-bottom: 20px;
+}
+
+.form-check-input:checked {
+    background-color: #412D4E; 
+    border-color: #412D4E; 
+}
+
+.card {
+    border-bottom: 16px solid #412D4E;
+}
+
+#formatlabel {
+    font-weight: 600;
+}
+
+.card-body {
+    padding-left: 30px;
+}
+
+.badge {
+    font-weight: 600;
 }
