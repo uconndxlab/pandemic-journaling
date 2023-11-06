@@ -31,10 +31,6 @@ p .card-text {
     line-height: 24px;
 }
 
-#paragraph {
-    text-indent: 25px;
- }
-
 h4 {
     margin-bottom: 20px;
 }
@@ -64,4 +60,18 @@ h4 {
 .fixed-container {
     position: sticky;
     top: 40px;
+}
+
+@media (max-width: 767px) {
+    
+    .audio-player {
+        margin-left: 30px;
+        margin-bottom: 30px;
+    }
+
+    img {
+        margin-left: 30px;
+        margin-bottom:30px;
+    }
+    
 }
