@@ -23,40 +23,42 @@
 
         <div class="row">
             <div class="col-md-4">
-                <h4>Filtered Search</h4>
-                <!-- search form -->
-                <form action="index.php" method="get">
-                    <div class="row">
-                        <div class="col-md-8 mb-3"> <!-- Adjust the column width as needed -->
-                            <input type="text" class="form-control" id="search" name="search" placeholder="Search...">
+                <div class="fixed-container">
+                    <h4>Filtered Search</h4>
+                    <!-- search form -->
+                    <form action="index.php" method="get">
+                        <div class="row">
+                            <div class="col-md-8 mb-3"> <!-- Adjust the column width as needed -->
+                                <input type="text" class="form-control" id="search" name="search" placeholder="Search...">
+                            </div>
+                            <div class="col-md-4 mb-3"> <!-- Adjust the column width as needed -->
+                                <button type="submit" class="btn btn-warning btn-block">Search</button>
+                            </div>
                         </div>
-                        <div class="col-md-4 mb-3"> <!-- Adjust the column width as needed -->
-                            <button type="submit" class="btn btn-warning btn-block">Search</button>
+                        <div class="mb-3">
+                            <label class="form-label mb-3" id="formatlabel">Format:</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="tags[]" value="text-only" id="text-only">
+                                <label class="form-check-label" for="covid">
+                                    Text Only
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="tags[]" value="text-and-image" id="text-and-image">
+                                <label class="form-check-label" for="politics">
+                                    Text & Image
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="tags[]" value="text-and-audio" id="text-and-audio">
+                                <label class="form-check-label" for="health">
+                                    Text & Audio
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label mb-3" id="formatlabel">Format:</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="tags[]" value="text-only" id="text-only">
-                            <label class="form-check-label" for="covid">
-                                Text Only
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="tags[]" value="text-and-image" id="text-and-image">
-                            <label class="form-check-label" for="politics">
-                                Text & Image
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="tags[]" value="text-and-audio" id="text-and-audio">
-                            <label class="form-check-label" for="health">
-                                Text & Audio
-                            </label>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn custom-purple">Filter</button>
-                </form>
+                        <button type="submit" class="btn custom-purple">Filter</button>
+                    </form>
+                </div>    
             </div>
 
             <div class="col-md-8">
@@ -70,7 +72,7 @@
                                 <p class="card-text" id="paragraph">     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Viverra tellus in hac habitasse platea dictumst. Nibh sit amet commodo nulla facilisi. Mattis enim ut tellus elementum sagittis vitae et leo duis. Libero volutpat sed cras ornare arcu dui vivamus.</p>
                                 <p class="card-text" id="paragraph">     Nunc sed blandit libero volutpat sed cras ornare arcu dui. Rhoncus mattis rhoncus urna neque viverra justo nec. In tellus integer feugiat scelerisque varius. Neque convallis a cras semper auctor neque vitae tempus quam. </p>
                                 <p class="card-text mb-4" id="paragraph">     Leo vel fringilla est ullamcorper eget nulla facilisi. Venenatis tellus in metus vulputate eu. Et malesuada fames ac turpis egestas sed tempus urna. Adipiscing enim eu turpis egestas pretium aenean. Nulla facilisi nullam vehicula ipsum a. </p>
-                                <p class="card-text" id="paragraph"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                             </div>
                         </div>
                         <div class="col-md-3 mx-auto d-flex align-items-center">
@@ -80,9 +82,41 @@
                         </div>
                     </div>
                 </div>
-
-
-
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-7">
+                            <div class="card-body mt-3">
+                                <h5><span class="badge bg-warning text-dark">Text & Audio</span></h5>
+                                <h6 class="card-title mt-3 mb-2">Card title</h6>
+                                <p class="card-text" id="paragraph">     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Viverra tellus in hac habitasse platea dictumst. Nibh sit amet commodo nulla facilisi. Mattis enim ut tellus elementum sagittis vitae et leo duis. Libero volutpat sed cras ornare arcu dui vivamus.</p>
+                                <p class="card-text mb-4" id="paragraph">     Leo vel fringilla est ullamcorper eget nulla facilisi. Venenatis tellus in metus vulputate eu. Et malesuada fames ac turpis egestas sed tempus urna. Adipiscing enim eu turpis egestas pretium aenean. Nulla facilisi nullam vehicula ipsum a. </p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+                            <div class="col-md-4 mx-auto d-flex align-items-center">
+                                <div class="audio-player">
+                                    <audio controls>
+                                    <source src="your-audio-file.mp3" type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                    </audio>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-12">
+                            <div class="card-body mt-3">
+                                <h5><span class="badge bg-warning text-dark">Text Only</span></h5>
+                                <h6 class="card-title mt-3 mb-2">Card title</h6>
+                                <p class="card-text" id="paragraph">     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Viverra tellus in hac habitasse platea dictumst. Nibh sit amet commodo nulla facilisi. Mattis enim ut tellus elementum sagittis vitae et leo duis. Libero volutpat sed cras ornare arcu dui vivamus.</p>
+                                <p class="card-text" id="paragraph">     Nunc sed blandit libero volutpat sed cras ornare arcu dui. Rhoncus mattis rhoncus urna neque viverra justo nec. In tellus integer feugiat scelerisque varius. Neque convallis a cras semper auctor neque vitae tempus quam. </p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
