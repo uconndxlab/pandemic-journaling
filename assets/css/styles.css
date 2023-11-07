@@ -8,13 +8,12 @@ body {
 
 .btn {
     font-weight: 600;
-    box-shadow: 0px 0px 10px rgba(20, 20, 20, 0.05);
+    box-shadow: 0px 0px 10px rgba(20, 20, 20, 0.08);
 }
 
 .custom-purple {
     background-color: #412D4E;
     color: white;
-    
 }
 
 .custom-purple:hover {
@@ -42,7 +41,7 @@ h4 {
 
 .card {
     border-bottom: 16px solid #412D4E;
-    box-shadow: 0px 0px 10px rgba(20, 20, 20, 0.05);
+    box-shadow: 0px 0px 10px rgba(20, 20, 20, 0.08);
 }
 
 #formatlabel {
