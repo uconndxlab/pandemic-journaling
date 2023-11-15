@@ -78,6 +78,7 @@ require_once 'inc/functions.php';
 
             <div class="col-md-8">
                 <h4>Results</h4>
+                <p>Showing <?php echo count($results); ?> results.</p>
 
                 <?php foreach ($results as $result) : ?>
                     <?php
@@ -94,7 +95,6 @@ require_once 'inc/functions.php';
                     // cleanup the timestamp of $featured_at
                     $featured_at = date("F j, Y", strtotime($featured_at));
                     $response_language = $result['response_language'];
-                    $text = $result['text'];
                     $audio = $result['audio'] ?? null;
                     ?>
 

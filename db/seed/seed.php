@@ -20,8 +20,7 @@ $sqlCreate = "CREATE TABLE entries (
     featured_at TEXT,
     response_language TEXT,
     audio TEXT,
-    image TEXT,
-    text TEXT
+    image TEXT
 )";
 
 // create the table
@@ -50,8 +49,7 @@ if ($file) {
             response_created_at,
             featured,
             featured_at,
-            response_language,
-            text
+            response_language
         ) VALUES (
             :public,
             :user_public,
@@ -62,8 +60,7 @@ if ($file) {
             :response_created_at,
             :featured,
             :featured_at,
-            :response_language,
-            :text
+            :response_language
         )");
 
         // Bind parameters
@@ -77,7 +74,7 @@ if ($file) {
         $stmt->bindValue(':featured', $data[7], SQLITE3_TEXT);
         $stmt->bindValue(':featured_at', $data[8], SQLITE3_TEXT);
         $stmt->bindValue(':response_language', $data[9], SQLITE3_TEXT);
-        $stmt->bindValue(':text', $data[10], SQLITE3_TEXT);
+
 
         // Execute the prepared statement
         $stmt->execute();

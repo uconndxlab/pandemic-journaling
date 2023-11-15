@@ -8,11 +8,13 @@ function getEntries(
     if ($type) {
         $stmt = $db->prepare('SELECT * FROM entries WHERE type = :type
         ORDER BY featured_at DESC
+        limit 55
         ');
         $stmt->bindValue(':type', $type, SQLITE3_TEXT);
     } else {
         $stmt = $db->prepare('SELECT * FROM entries 
         ORDER BY featured_at DESC
+        limit 55
         ');
     }
 
