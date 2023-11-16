@@ -3,7 +3,7 @@ function getEntries(
     $type = null
 ) {
     // Connect to SQLite database
-    $db = new SQLite3('db/database.db');
+    $db = new SQLite3('../db/database.db');
 
     if ($type) {
         $stmt = $db->prepare('SELECT * FROM entries WHERE type = :type
