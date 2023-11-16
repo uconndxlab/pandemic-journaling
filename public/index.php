@@ -37,16 +37,11 @@ require_once '../inc/functions.php';
         <div class="row">
             <div class="col-md-4">
                 <div class="fixed-container">
-                    <h4>Filtered Search</h4>
                     <!-- search form -->
                     <form action="" method="get">
-                        <div class="row">
-                            <div class="col-md-4 mb-3"> <!-- Adjust the column width as needed -->
-                                <button type="submit" class="btn custom-purple btn-block">Search</button>
-                            </div>
-                        </div>
+
                         <div class="mb-3">
-                            <label class="form-label mb-3" id="formatlabel">Format:</label>
+                            <h5 class="form-label mb-3" id="formatlabel">Format:</h5>
                             <div class="form-check">
                                 <input <?php if (isset($_GET['type']) && $_GET['type'] == "text_only") echo "checked"; ?> class="form-check-input" type="checkbox" name="type" value="text_only" id="text-only">
                                 <label class="form-check-label" for="text-only">
@@ -151,9 +146,7 @@ require_once '../inc/functions.php';
                                     </div>
                                 </div>
                                 <div class="col-md-3 mx-auto d-flex align-items-center">
-                                    <img alt="<?php echo $image; ?>" src="
-                                    <?php echo $image; ?>
-                            " class="img-fluid rounded-start" alt="...">
+                                    <img alt="<?php echo $image; ?>" src="assets/content/images-fe/<?php echo strip_tags($image); ?>" class="img-fluid rounded-start" alt="...">
                                 </div>
                             </div>
                         </div>
@@ -182,7 +175,7 @@ require_once '../inc/functions.php';
                                     <div class="audio-player">
                                         <audio controls>
                                             <source 
-                                            src="<?php echo $audio; ?> " 
+                                            src="/assets/content/audio-fe/<?php echo strip_tags($audio); ?>" 
                                             type="audio/mpeg">
                                             Your browser does not support the audio element.
                                         </audio>

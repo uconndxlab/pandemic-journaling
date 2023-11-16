@@ -1,2 +1,3 @@
 *.db
+public/assets/content
 .DS_STORE
