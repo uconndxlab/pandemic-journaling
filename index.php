@@ -39,11 +39,8 @@ require_once 'inc/functions.php';
                 <div class="fixed-container">
                     <h4>Filtered Search</h4>
                     <!-- search form -->
-                    <form action="index.php" method="get">
+                    <form action="" method="get">
                         <div class="row">
-                            <div class="col-md-8 mb-3"> <!-- Adjust the column width as needed -->
-                                <input type="text" class="form-control" id="search" name="search" placeholder="Search...">
-                            </div>
                             <div class="col-md-4 mb-3"> <!-- Adjust the column width as needed -->
                                 <button type="submit" class="btn custom-purple btn-block">Search</button>
                             </div>
@@ -51,21 +48,28 @@ require_once 'inc/functions.php';
                         <div class="mb-3">
                             <label class="form-label mb-3" id="formatlabel">Format:</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="tags[]" value="text-only" id="text-only">
+                                <input 
+                                <?php if (isset($_GET['type']) && $_GET['type'] == "text_only") echo "checked"; ?>
+                                class="form-check-input" type="checkbox" name="type" value="text_only" id="text-only">
                                 <label class="form-check-label" for="text-only">
                                     Text Only
                                 </label>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="tags[]" value="text-and-image" id="text-and-image">
+                                <input 
+                                <?php if (isset($_GET['type']) && $_GET['type'] == "photo_and_text") echo "checked"; ?>
+                                class="form-check-input" type="checkbox" name="type" value="photo_and_text" id="text-and-image">
                                 <label class="form-check-label" for="text-and-image">
                                     Text & Image
                                 </label>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="tags[]" value="text-and-audio" id="text-and-audio">
+                                <input 
+                                
+                                <?php if (isset($_GET['type']) && $_GET['type'] == "audio_only") echo "checked"; ?>
+                                class="form-check-input" type="checkbox" name="type" value="audio_only" id="text-and-audio">
                                 <label class="form-check-label" for="text-and-audio">
                                     Text & Audio
                                 </label>
