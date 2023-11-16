@@ -1,7 +1,4 @@
 <?php
-
-use function PHPSTORM_META\type;
-
 require_once '../inc/functions.php';
 ?>
 
