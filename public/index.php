@@ -35,7 +35,7 @@ require_once '../inc/functions.php';
         ?>
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="fixed-container">
                     <!-- search form -->
                     <form action="" method="get">
@@ -68,7 +68,7 @@ require_once '../inc/functions.php';
                 </div>
             </div>
 
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <h4>Results</h4>
                 <p>Showing <?php echo count($results); ?> results.</p>
 
