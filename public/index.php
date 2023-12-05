@@ -79,61 +79,61 @@ require_once '../inc/functions.php';
             <div class="col-md-9">
                 <h4>Results</h4>
                 <p>Page <?php echo $page; ?> of <?php echo $totalPages; ?></p>
-                <p> <?php echo $totalEntries; ?> total entries.</p>
+                <p> <?php echo $totalEntries; ?> entries match your search criteria.</p>
                 <!-- pagination (bootstrap) -->
-<!-- pagination (bootstrap) -->
-<nav aria-label="Page navigation">
-    <ul class="pagination">
-        <?php if ($page > 1) : ?>
-            <li class="page-item">
-                <a class="page-link" href="?page=<?php echo $page - 1; ?>" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-        <?php endif; ?>
+                <!-- pagination (bootstrap) -->
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <?php if ($page > 1) : ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<?php echo $page - 1; ?>" aria-label="Previous">
+                                    <span aria-hidden="true">Previous Page</span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
 
-        <?php
-        $startPage = max(1, $page - 2);
-        $endPage = min($startPage + 4, $totalPages);
+                        <?php
+                        $startPage = max(1, $page - 2);
+                        $endPage = min($startPage + 4, $totalPages);
 
-        if ($startPage > 1) :
-        ?>
-            <li class="page-item">
-                <a class="page-link" href="?page=1">1</a>
-            </li>
-            <?php if ($startPage > 2) : ?>
-                <li class="page-item disabled">
-                    <a class="page-link">...</a>
-                </li>
-            <?php endif; ?>
-        <?php endif; ?>
+                        if ($startPage > 1) :
+                        ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1">1</a>
+                            </li>
+                            <?php if ($startPage > 2) : ?>
+                                <li class="page-item disabled">
+                                    <a class="page-link">...</a>
+                                </li>
+                            <?php endif; ?>
+                        <?php endif; ?>
 
-        <?php for ($i = $startPage; $i <= $endPage; $i++) : ?>
-            <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
-                <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-            </li>
-        <?php endfor; ?>
+                        <?php for ($i = $startPage; $i <= $endPage; $i++) : ?>
+                            <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
+                                <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                            </li>
+                        <?php endfor; ?>
 
-        <?php if ($endPage < $totalPages) : ?>
-            <?php if ($endPage < $totalPages - 1) : ?>
-                <li class="page-item disabled">
-                    <a class="page-link">...</a>
-                </li>
-            <?php endif; ?>
-            <li class="page-item">
-                <a class="page-link" href="?page=<?php echo $totalPages; ?>"><?php echo $totalPages; ?></a>
-            </li>
-        <?php endif; ?>
+                        <?php if ($endPage < $totalPages) : ?>
+                            <?php if ($endPage < $totalPages - 1) : ?>
+                                <li class="page-item disabled">
+                                    <a class="page-link">...</a>
+                                </li>
+                            <?php endif; ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<?php echo $totalPages; ?>"><?php echo $totalPages; ?></a>
+                            </li>
+                        <?php endif; ?>
 
-        <?php if ($page < $totalPages) : ?>
-            <li class="page-item">
-                <a class="page-link" href="?page=<?php echo $page + 1; ?>" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        <?php endif; ?>
-    </ul>
-</nav>
+                        <?php if ($page < $totalPages) : ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<?php echo $page + 1; ?>" aria-label="Next">
+                                    <span aria-hidden="true">Next Page</span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </nav>
 
                 <?php foreach ($results as $result) : ?>
                     <?php
@@ -229,17 +229,16 @@ require_once '../inc/functions.php';
                                             <?php echo strip_tags($excerpt_or_original_text); ?>
                                         </div>
                                         <p class="card-text mb-3">
-                                        <small class="text-muted">
-                                            <?php echo $featured_at; ?>
-                                        </small></p>
+                                            <small class="text-muted">
+                                                <?php echo $featured_at; ?>
+                                            </small>
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="col-md-4 mx-auto d-flex align-items-center">
                                     <div class="audio-player">
                                         <audio controls>
-                                            <source 
-                                            src="/assets/content/audio-fe/<?php echo strip_tags($audio); ?>" 
-                                            type="audio/mpeg">
+                                            <source src="/assets/content/audio-fe/<?php echo strip_tags($audio); ?>" type="audio/mpeg">
                                             Your browser does not support the audio element.
                                         </audio>
                                     </div>
