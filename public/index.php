@@ -26,11 +26,19 @@ require_once '../inc/functions.php';
         </div>
 
         <?php
-
-        if (isset($_GET['type'])) {
-            $results = getEntries($_GET['type']);
+        // Get the total number of entries
+        $totalEntries = getTotalEntries($_GET['type']   ?? null);
+        // Calculate the total number of pages
+        $totalPages = ceil($totalEntries / 48);
+        if (isset($_GET['page'])) {
+            $page = $_GET['page'];
         } else {
-            $results = getEntries();
+            $page = 1;
+        }
+        if (isset($_GET['type'])) {
+            $results = getEntries($_GET['type'], $page);
+        } else {
+            $results = getEntries(null, $page);
         }
         ?>
 
@@ -70,7 +78,62 @@ require_once '../inc/functions.php';
 
             <div class="col-md-9">
                 <h4>Results</h4>
-                <p>Showing <?php echo count($results); ?> results.</p>
+                <p>Page <?php echo $page; ?> of <?php echo $totalPages; ?></p>
+                <p> <?php echo $totalEntries; ?> total entries.</p>
+                <!-- pagination (bootstrap) -->
+<!-- pagination (bootstrap) -->
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <?php if ($page > 1) : ?>
+            <li class="page-item">
+                <a class="page-link" href="?page=<?php echo $page - 1; ?>" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        <?php endif; ?>
+
+        <?php
+        $startPage = max(1, $page - 2);
+        $endPage = min($startPage + 4, $totalPages);
+
+        if ($startPage > 1) :
+        ?>
+            <li class="page-item">
+                <a class="page-link" href="?page=1">1</a>
+            </li>
+            <?php if ($startPage > 2) : ?>
+                <li class="page-item disabled">
+                    <a class="page-link">...</a>
+                </li>
+            <?php endif; ?>
+        <?php endif; ?>
+
+        <?php for ($i = $startPage; $i <= $endPage; $i++) : ?>
+            <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
+                <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+            </li>
+        <?php endfor; ?>
+
+        <?php if ($endPage < $totalPages) : ?>
+            <?php if ($endPage < $totalPages - 1) : ?>
+                <li class="page-item disabled">
+                    <a class="page-link">...</a>
+                </li>
+            <?php endif; ?>
+            <li class="page-item">
+                <a class="page-link" href="?page=<?php echo $totalPages; ?>"><?php echo $totalPages; ?></a>
+            </li>
+        <?php endif; ?>
+
+        <?php if ($page < $totalPages) : ?>
+            <li class="page-item">
+                <a class="page-link" href="?page=<?php echo $page + 1; ?>" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        <?php endif; ?>
+    </ul>
+</nav>
 
                 <?php foreach ($results as $result) : ?>
                     <?php

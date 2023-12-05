@@ -1,22 +1,49 @@
 <?php
-function getEntries(
-    $type = null
-) {
+function getTotalEntries($type = null) {
     // Connect to SQLite database
     $db = new SQLite3('../db/database.db');
 
     if ($type) {
+        $stmt = $db->prepare('SELECT COUNT(*) AS total FROM entries WHERE type = :type');
+        $stmt->bindValue(':type', $type, SQLITE3_TEXT);
+    } else {
+        $stmt = $db->prepare('SELECT COUNT(*) AS total FROM entries');
+    }
+
+    $result = $stmt->execute();
+    $row = $result->fetchArray(SQLITE3_ASSOC);
+
+    // Close database connection
+    $db->close();
+
+    return $row['total'];
+}
+function getEntries(
+    $type = null, 
+    $page = 1
+) {
+    // Connect to SQLite database
+    $db = new SQLite3('../db/database.db');
+
+    // Set the number of entries per page
+    $entriesPerPage = 48;
+
+    // Calculate the offset based on the current page
+    $offset = ($page - 1) * $entriesPerPage;
+
+    if ($type) {
         $stmt = $db->prepare('SELECT * FROM entries WHERE type = :type
         ORDER BY featured_at DESC
-        limit 55
-        ');
+        LIMIT :limit OFFSET :offset');
         $stmt->bindValue(':type', $type, SQLITE3_TEXT);
     } else {
         $stmt = $db->prepare('SELECT * FROM entries 
         ORDER BY featured_at DESC
-        limit 55
-        ');
+        LIMIT :limit OFFSET :offset');
     }
+
+    $stmt->bindValue(':limit', $entriesPerPage, SQLITE3_INTEGER);
+    $stmt->bindValue(':offset', $offset, SQLITE3_INTEGER);
 
     $result = $stmt->execute();
 
