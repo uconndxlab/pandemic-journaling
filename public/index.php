@@ -8,7 +8,7 @@ require_once '../inc/functions.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pandemic Journaling Project</title>
+    <title>Pandemic Journaling Project (Test)</title>
     <!-- Bootstrap 5 CSS CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/styles.css">
@@ -26,27 +26,30 @@ require_once '../inc/functions.php';
         </div>
 
         <?php
-
-        if (isset($_GET['type'])) {
-            $results = getEntries($_GET['type']);
+        // Get the total number of entries
+        $totalEntries = getTotalEntries($_GET['type']   ?? null);
+        // Calculate the total number of pages
+        $totalPages = ceil($totalEntries / 48);
+        if (isset($_GET['page'])) {
+            $page = $_GET['page'];
         } else {
-            $results = getEntries();
+            $page = 1;
+        }
+        if (isset($_GET['type'])) {
+            $results = getEntries($_GET['type'], $page);
+        } else {
+            $results = getEntries(null, $page);
         }
         ?>
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="fixed-container">
-                    <h4>Filtered Search</h4>
                     <!-- search form -->
                     <form action="" method="get">
-                        <div class="row">
-                            <div class="col-md-4 mb-3"> <!-- Adjust the column width as needed -->
-                                <button type="submit" class="btn custom-purple btn-block">Search</button>
-                            </div>
-                        </div>
+
                         <div class="mb-3">
-                            <label class="form-label mb-3" id="formatlabel">Format:</label>
+                            <h5 class="form-label mb-3" id="formatlabel">Format:</h5>
                             <div class="form-check">
                                 <input <?php if (isset($_GET['type']) && $_GET['type'] == "text_only") echo "checked"; ?> class="form-check-input" type="checkbox" name="type" value="text_only" id="text-only">
                                 <label class="form-check-label" for="text-only">
@@ -73,9 +76,77 @@ require_once '../inc/functions.php';
                 </div>
             </div>
 
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <h4>Results</h4>
-                <p>Showing <?php echo count($results); ?> results.</p>
+                <p>Page <?php echo $page; ?> of <?php echo $totalPages; ?></p>
+                <p> <?php echo $totalEntries; ?> entries match your search criteria.</p>
+                <?php
+
+                $type = $_GET['type'] ?? null;
+                if ($type) {
+                    $type_text = '&type=' . $type;
+                }
+                ?>
+
+
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <?php if ($page > 1) : ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<?php echo $page - 1 . $type_text;
+                                ?>
+                                " aria-label="Previous">
+                                    <span aria-hidden="true">Previous Page</span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+
+                        <?php
+                        $startPage = max(1, $page - 2);
+                        $endPage = min($startPage + 4, $totalPages);
+
+                        if ($startPage > 1) :
+                        ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1<?php echo $type_text;?>">1</a>
+                            </li>
+                            <?php if ($startPage > 2) : ?>
+                                <li class="page-item disabled">
+                                    <a class="page-link">...</a>
+                                </li>
+                            <?php endif; ?>
+                        <?php endif; ?>
+
+                        <?php for ($i = $startPage; $i <= $endPage; $i++) : ?>
+                            <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
+                                <a class="page-link" href="?page=<?php echo $i . $type_text; 
+                                
+                                ?>"><?php echo $i; ?></a>
+                            </li>
+                        <?php endfor; ?>
+
+                        <?php if ($endPage < $totalPages) : ?>
+                            <?php if ($endPage < $totalPages - 1) : ?>
+                                <li class="page-item disabled">
+                                    <a class="page-link">...</a>
+                                </li>
+                            <?php endif; ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<?php echo $totalPages . $type_text;  ?>"><?php echo $totalPages; ?></a>
+                            </li>
+                        <?php endif; ?>
+
+                        <?php if ($page < $totalPages) : ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<?php echo $page + 1 . $type_text; ?>
+
+                                " aria-label="Next">
+                                    <span aria-hidden="true">Next Page</span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </nav>
 
                 <?php foreach ($results as $result) : ?>
                     <?php
@@ -151,9 +222,7 @@ require_once '../inc/functions.php';
                                     </div>
                                 </div>
                                 <div class="col-md-3 mx-auto d-flex align-items-center">
-                                    <img alt="<?php echo $image; ?>" src="
-                                    <?php echo $image; ?>
-                            " class="img-fluid rounded-start" alt="...">
+                                    <img alt="<?php echo $image; ?>" src="assets/content/images-fe/<?php echo strip_tags($image); ?>" class="img-fluid rounded-start" alt="...">
                                 </div>
                             </div>
                         </div>
@@ -173,17 +242,16 @@ require_once '../inc/functions.php';
                                             <?php echo strip_tags($excerpt_or_original_text); ?>
                                         </div>
                                         <p class="card-text mb-3">
-                                        <small class="text-muted">
-                                            <?php echo $featured_at; ?>
-                                        </small></p>
+                                            <small class="text-muted">
+                                                <?php echo $featured_at; ?>
+                                            </small>
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="col-md-4 mx-auto d-flex align-items-center">
                                     <div class="audio-player">
                                         <audio controls>
-                                            <source 
-                                            src="<?php echo $audio; ?> " 
-                                            type="audio/mpeg">
+                                            <source src="/assets/content/audio-fe/<?php echo strip_tags($audio); ?>" type="audio/mpeg">
                                             Your browser does not support the audio element.
                                         </audio>
                                     </div>

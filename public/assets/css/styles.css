@@ -65,6 +65,41 @@ label {
     cursor: pointer;
 }
 
+/** improve the colors of the pagination buttons */
+.pagination > li > a,
+.pagination > li > span {
+    background-color: #412D4E;
+    color: white;
+}
+
+.pagination > li > a:hover,
+.pagination > li > span:hover {
+    background-color: #261b2e;
+    color: white;
+}
+
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+    background-color: #333;
+    border-color: #333;
+    color:#eee;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #412D4E;
+    background-color: #eee;
+    border-color: #eee;
+}
+
+/** improve the colors of the pagination buttons */
+
+
+
 @media (max-width: 767px) {
     
     .audio-player {
