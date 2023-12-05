@@ -80,13 +80,22 @@ require_once '../inc/functions.php';
                 <h4>Results</h4>
                 <p>Page <?php echo $page; ?> of <?php echo $totalPages; ?></p>
                 <p> <?php echo $totalEntries; ?> entries match your search criteria.</p>
-                <!-- pagination (bootstrap) -->
-                <!-- pagination (bootstrap) -->
+                <?php
+
+                $type = $_GET['type'] ?? null;
+                if ($type) {
+                    $type_text = '&type=' . $type;
+                }
+                ?>
+
+
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
                         <?php if ($page > 1) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="?page=<?php echo $page - 1; ?>" aria-label="Previous">
+                                <a class="page-link" href="?page=<?php echo $page - 1 . $type_text;
+                                ?>
+                                " aria-label="Previous">
                                     <span aria-hidden="true">Previous Page</span>
                                 </a>
                             </li>
@@ -99,7 +108,7 @@ require_once '../inc/functions.php';
                         if ($startPage > 1) :
                         ?>
                             <li class="page-item">
-                                <a class="page-link" href="?page=1">1</a>
+                                <a class="page-link" href="?page=1<?php echo $type_text;?>">1</a>
                             </li>
                             <?php if ($startPage > 2) : ?>
                                 <li class="page-item disabled">
@@ -110,7 +119,9 @@ require_once '../inc/functions.php';
 
                         <?php for ($i = $startPage; $i <= $endPage; $i++) : ?>
                             <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
-                                <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                <a class="page-link" href="?page=<?php echo $i . $type_text; 
+                                
+                                ?>"><?php echo $i; ?></a>
                             </li>
                         <?php endfor; ?>
 
@@ -121,13 +132,15 @@ require_once '../inc/functions.php';
                                 </li>
                             <?php endif; ?>
                             <li class="page-item">
-                                <a class="page-link" href="?page=<?php echo $totalPages; ?>"><?php echo $totalPages; ?></a>
+                                <a class="page-link" href="?page=<?php echo $totalPages . $type_text;  ?>"><?php echo $totalPages; ?></a>
                             </li>
                         <?php endif; ?>
 
                         <?php if ($page < $totalPages) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="?page=<?php echo $page + 1; ?>" aria-label="Next">
+                                <a class="page-link" href="?page=<?php echo $page + 1 . $type_text; ?>
+
+                                " aria-label="Next">
                                     <span aria-hidden="true">Next Page</span>
                                 </a>
                             </li>
