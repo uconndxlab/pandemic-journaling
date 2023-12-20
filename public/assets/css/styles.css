@@ -2,6 +2,10 @@ body {
     background: white;
 }
 
+img {
+    max-width: 100%;
+}
+
 .btn-warning {
     color: black;
 }
