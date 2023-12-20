@@ -32,7 +32,7 @@ require_once '../inc/functions.php';
         // Get the total number of entries
         $totalEntries = getTotalEntries($_GET['type'] ?? null);
         // Calculate the total number of pages
-        $totalPages = ceil($totalEntries / 48);
+        $totalPages = ceil($totalEntries / 24);
         if (isset($_GET['page'])) {
             $page = $_GET['page'];
         } else {

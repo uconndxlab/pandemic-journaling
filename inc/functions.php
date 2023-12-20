@@ -26,7 +26,7 @@ function getEntries(
     $db = new SQLite3('../db/database.db');
 
     // Set the number of entries per page
-    $entriesPerPage = 48;
+    $entriesPerPage = 20;
 
     // Calculate the offset based on the current page
     $offset = ($page - 1) * $entriesPerPage;
