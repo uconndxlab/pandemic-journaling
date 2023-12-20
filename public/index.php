@@ -307,8 +307,7 @@ require_once '../inc/functions.php';
         function sendHeight() {
             var height = document.body.scrollHeight;
             parent.postMessage({ height: height }, '*');
-            // also remove the scrollbar from the iframe
-            document.body.style.overflow = 'hidden';
+            
         }
 
         // Call sendHeight whenever the content changes (e.g., on load or after dynamic changes)
