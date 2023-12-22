@@ -59,6 +59,22 @@ function getEntries(
     return $results;
 }
 
+function getEntry($id) {
+    // Connect to SQLite database
+    $db = new SQLite3('../db/database.db');
+
+    $stmt = $db->prepare('SELECT * FROM entries WHERE id = :id');
+    $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+
+    $result = $stmt->execute();
+    $row = $result->fetchArray(SQLITE3_ASSOC);
+
+    // Close database connection
+    $db->close();
+
+    return $row;
+}
+
 function displayResults($results) {
     // Display results in HTML format
     foreach ($results as $result) {
@@ -86,4 +102,7 @@ function displayResults($results) {
 
     }
 }
+
+
+
 ?>
