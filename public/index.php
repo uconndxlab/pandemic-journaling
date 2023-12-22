@@ -187,7 +187,7 @@ require_once '../inc/functions.php';
                     $audio = $result['audio'] ?? null;
                     $image = $result['image'] ?? null;
 
-                    include 'layout-entry.php';
+                    include '../views/layout-entry.php';
 
                     ?>
                   
@@ -213,7 +213,7 @@ require_once '../inc/functions.php';
                     $audio = $result['audio'] ?? null;
                     $image = $result['image'] ?? null;
 
-                    include 'layout-entry.php';
+                    include '../views/layout-entry.php';
 
                     ?>
 
@@ -247,6 +247,9 @@ require_once '../inc/functions.php';
         // Call sendHeight whenever the content changes (e.g., on load or after dynamic changes)
         window.onload = sendHeight;
         // You might need to call sendHeight on other events, depending on your content
+
+
+
     </script>
 
 </body>

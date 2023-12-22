@@ -25,9 +25,6 @@
                         <a href="?entryID=<?php echo $id; ?>" target="_blank" class="btn btn-text">
                             <i class="fas fa-share"></i>
                             Share</a>
-
-
-
                     </small></p>
             </div>
         </div>
@@ -48,8 +45,10 @@
                     </p>
                 </div>
             </div>
-            <div class="col-md-3 mx-auto d-flex align-items-center">
-                <img alt="<?php echo $image; ?>" src="assets/content/images-fe/<?php echo strip_tags($image); ?>" class="img-fluid rounded-start" alt="...">
+            <div class="col-md-3 mx-auto d-flex align-items-center my-4">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage('<?php echo strip_tags($image); ?>')">
+                    <img alt="<?php echo $image; ?>" src="assets/content/images-fe/<?php echo strip_tags($image); ?>" class="img-fluid rounded-start" alt="...">
+                </a>
             </div>
         </div>
         <div class="row ps-5 pe-5">
@@ -62,9 +61,6 @@
                         <a href="?entryID=<?php echo $id; ?>" target="_blank" class="btn btn-text">
                             <i class="fas fa-share"></i>
                             Share</a>
-
-
-
                     </small></p>
             </div>
         </div>
@@ -118,3 +114,22 @@
         </div>
     </div>
 <?php endif; ?>
+
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showImage(image) {
+        document.querySelector('.modal-body').innerHTML = `<img src="assets/content/images-fe/${image}" class="img-fluid rounded-start" alt="...">`;
+    }
+</script>
+
