@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="col-md-3 mx-auto d-flex align-items-center my-4">
-                <a href="<?php echo $image;?>"
+                <a href="assets/content/images-fe/<?php echo $image;?>"
                 target="_blank">
                     <img alt="<?php echo $image; ?>" src="assets/content/images-fe/<?php echo strip_tags($image); ?>" class="img-fluid rounded-start" alt="...">
                 </a>
