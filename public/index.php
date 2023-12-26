@@ -141,15 +141,27 @@ require_once '../inc/functions.php';
                     <?php if (isset($_GET['type'])): ?>
                     for <?php echo $type_text; ?>
                     <?php endif; ?>
-
                 </h4>
-                <p>Page
-                    <?php echo $page; ?> of
-                    <?php echo $totalPages; ?>
-                </p>
+
                 <p>
-                    <?php echo $totalEntries; ?> entries match your search criteria.
+                    <?php echo $totalEntries; ?> entries match your search criteria. <br>
+                    <?php // showing only [lang] entries
+                    if ($lang) {
+                        switch ($lang) {
+                            case "en":
+                                $lang_text = "English";
+                                break;
+                            case "sp":
+                                $lang_text = "Spanish";
+                                break;
+                        }
+
+                        echo "<small>Showing only " . $lang_text . " Language entries.</small>";
+                    }
+                    ?>
                 </p>
+
+
                 <?php
 
                 if ($type) {
@@ -168,6 +180,10 @@ require_once '../inc/functions.php';
 
                 ?>
 
+                <p>Page
+                    <?php echo $page; ?> of
+                    <?php echo $totalPages; ?>
+                </p>
 
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
