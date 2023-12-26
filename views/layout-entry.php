@@ -134,8 +134,7 @@
 <script>
     function showImage(image) {
         document.querySelector('.modal-body').innerHTML = `<img src="assets/content/images-fe/${image}" class="img-fluid rounded-start" alt="...">`;
-        // scroll to top of modal because this app will be in an iframe
-        document.querySelector('.modal-body').scrollIntoView();
+
     }
 </script>
 
