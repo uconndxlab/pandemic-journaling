@@ -4,7 +4,6 @@ require_once '../inc/functions.php';
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,10 +39,31 @@ require_once '../inc/functions.php';
             $page = 1;
         }
         if (isset($_GET['type'])) {
-            $results = getEntries($_GET['type'], $page);
+            $type = $_GET['type'];
+            switch ($_GET['type']) {
+                case "text_only":
+                    $type_text = "Text Only";
+                    break;
+                case "photo_and_text":
+                    $type_text = "Text & Image";
+                    break;
+                case "audio_only":
+                    $type_text = "Text & Audio";
+                    break;
+            }
         } else {
-            $results = getEntries(null, $page);
+            $type = null;
+            $type_text = "All Entries";
+        } 
+
+        if (isset($_GET['language'])) {
+            $lang = $_GET['language'];
+        } else {
+            $lang = null;
         }
+
+        // Get the entries for the current page
+        $results = getEntries($type, $lang, $page);
         ?>
 
         <div class="row">
@@ -51,7 +71,6 @@ require_once '../inc/functions.php';
                 <div class="fixed-container">
                     <!-- search form -->
                     <form action="" method="get">
-
                         <div class="mb-3">
                             <h5 class="form-label mb-3" id="formatlabel">Format:</h5>
                             <div class="form-check">
@@ -77,16 +96,48 @@ require_once '../inc/functions.php';
                                     Text & Audio
                                 </label>
                             </div>
+                            <h5 class="form-label mt-4 mb-3" id="formatlabel">Language:</h5>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="language"
+                                <?php if (isset($_GET['language']) && $_GET['language'] == "en")
+                                            echo "checked"; ?> 
+                                
+                                value="en" id="english">
+                                <label class="form-check-label" for="english">
+                                    English Only
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+
+                                <input class="form-check-input" type="checkbox" 
+                                <?php if (isset($_GET['language']) && $_GET['language'] == "sp")
+                                            echo "checked"; ?>
+                                
+                                name="language" value="sp" id="spanish">
+                                <label class="form-check-label" for="spanish">
+                                    Solamente Español
+                                </label>
+
+                            </div>
+
                         </div>
                         <button type="submit" class="btn custom-purple mb-5">Filter</button>
                     </form>
                 </div>
+
             </div>
 
             <div class="col-md-9">
 
                 <?php if (!isset($_GET['entryID'])): ?>
-                <h4>Results</h4>
+                <h4>Results 
+                    <?php if (isset($_GET['type'])): ?>
+                    for <?php echo $type_text; ?>
+                    <?php endif; ?>
+
+                </h4>
                 <p>Page
                     <?php echo $page; ?> of
                     <?php echo $totalPages; ?>

@@ -20,6 +20,7 @@ function getTotalEntries($type = null) {
 }
 function getEntries(
     $type = null, 
+    $lang=null,
     $page = 1
 ) {
     // Connect to SQLite database
@@ -31,11 +32,24 @@ function getEntries(
     // Calculate the offset based on the current page
     $offset = ($page - 1) * $entriesPerPage;
 
-    if ($type) {
+    // build the query based on the type and language and page
+
+    if ($type && $lang) {
+        $stmt = $db->prepare('SELECT * FROM entries WHERE type = :type AND response_language = :lang
+        ORDER BY featured_at DESC
+        LIMIT :limit OFFSET :offset');
+        $stmt->bindValue(':type', $type, SQLITE3_TEXT);
+        $stmt->bindValue(':lang', $lang, SQLITE3_TEXT);
+    } elseif ($type && !$lang) {
         $stmt = $db->prepare('SELECT * FROM entries WHERE type = :type
         ORDER BY featured_at DESC
         LIMIT :limit OFFSET :offset');
         $stmt->bindValue(':type', $type, SQLITE3_TEXT);
+    } elseif (!$type && $lang) {
+        $stmt = $db->prepare('SELECT * FROM entries WHERE response_language = :lang
+        ORDER BY featured_at DESC
+        LIMIT :limit OFFSET :offset');
+        $stmt->bindValue(':lang', $lang, SQLITE3_TEXT);
     } else {
         $stmt = $db->prepare('SELECT * FROM entries 
         ORDER BY featured_at DESC
