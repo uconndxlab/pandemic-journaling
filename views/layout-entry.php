@@ -46,11 +46,8 @@
                 </div>
             </div>
             <div class="col-md-3 mx-auto d-flex align-items-center my-4">
-                <a href="#"
-                     data-bs-toggle="modal"
-                     data-bs-target="#imageModal"
-                     onclick="showImage('<?php echo strip_tags($image); ?>')"
-                >
+                <a href="<?php echo $image;?>"
+                target="_blank">
                     <img alt="<?php echo $image; ?>" src="assets/content/images-fe/<?php echo strip_tags($image); ?>" class="img-fluid rounded-start" alt="...">
                 </a>
             </div>
@@ -133,10 +130,7 @@
 
 <script>
     function showImage(image) {
-        // make it so the height of the modal is 100vh so that it's always full screen
-        document.querySelector('.modal-dialog').classList.add('modal-fullscreen');
-        
-        document.querySelector('.modal-body').innerHTML = `<img src="assets/content/images-fe/${image}" class="img-fluid rounded-start" alt="...">`;
+        //document.querySelector('.modal-body').innerHTML = `<img src="assets/content/images-fe/${image}" class="img-fluid rounded-start" alt="...">`;
     }
 
 </script>
