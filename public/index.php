@@ -29,10 +29,7 @@ require_once '../inc/functions.php';
         </div>
 
         <?php
-        // Get the total number of entries
-        $totalEntries = getTotalEntries($_GET['type'] ?? null);
-        // Calculate the total number of pages
-        $totalPages = ceil($totalEntries / 24);
+
         if (isset($_GET['page'])) {
             $page = $_GET['page'];
         } else {
@@ -64,6 +61,14 @@ require_once '../inc/functions.php';
 
         // Get the entries for the current page
         $results = getEntries($type, $lang, $page);
+
+        // Get the total number of entries
+        $totalEntries = getTotalEntries($type ?? null, $lang ?? null);
+        // Calculate the total number of pages
+        $totalPages = ceil($totalEntries / 24);
+
+
+
         ?>
 
         <div class="row">
@@ -147,13 +152,20 @@ require_once '../inc/functions.php';
                 </p>
                 <?php
 
-                $type = $_GET['type'] ?? null;
                 if ($type) {
-                    $type_text = '&type=' . $type;
+                    $type_query = '&type=' . $type;
                 } 
                 else {
-                    $type_text = '';
+                    $type_query = '';
                 }
+
+                if ($lang) {
+                    $lang_query = '&language=' . $lang;
+                } 
+                else {
+                    $lang_query = '';
+                }
+
                 ?>
 
 
@@ -161,8 +173,8 @@ require_once '../inc/functions.php';
                     <ul class="pagination">
                         <?php if ($page > 1) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="?page=<?php echo $page - 1 . $type_text;
-                                                                    ?>
+                                <a class="page-link" href="?page=<?php echo $page - 1 . $type_query . $lang_query; ?>
+
                                 " aria-label="Previous">
                                     <span aria-hidden="true">Previous Page</span>
                                 </a>
@@ -176,7 +188,7 @@ require_once '../inc/functions.php';
                         if ($startPage > 1) :
                         ?>
                             <li class="page-item">
-                                <a class="page-link" href="?page=1<?php echo $type_text; ?>">1</a>
+                                <a class="page-link" href="?page=1<?php echo $type_query . $lang_query ; ?>">1</a>
                             </li>
                             <?php if ($startPage > 2) : ?>
                                 <li class="page-item disabled">
@@ -187,7 +199,7 @@ require_once '../inc/functions.php';
 
                         <?php for ($i = $startPage; $i <= $endPage; $i++) : ?>
                             <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
-                                <a class="page-link" href="?page=<?php echo $i . $type_text;
+                                <a class="page-link" href="?page=<?php echo $i . $type_query . $lang_query;
 
                                                                     ?>">
                                     <?php echo $i; ?>

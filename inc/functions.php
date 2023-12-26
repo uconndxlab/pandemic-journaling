@@ -1,12 +1,22 @@
 <?php
-function getTotalEntries($type = null) {
+function getTotalEntries($type = null, $lang=null) {
     // Connect to SQLite database
     $db = new SQLite3('../db/database.db');
 
-    if ($type) {
+    if ($type && !$lang) {
         $stmt = $db->prepare('SELECT COUNT(*) AS total FROM entries WHERE type = :type');
         $stmt->bindValue(':type', $type, SQLITE3_TEXT);
-    } else {
+    } 
+    elseif (!$type && $lang ) {
+        $stmt = $db->prepare('SELECT COUNT(*) AS total FROM entries WHERE response_language = :lang');
+        $stmt->bindValue(':lang', $lang, SQLITE3_TEXT);
+    }
+    elseif ($type && $lang) {
+        $stmt = $db->prepare('SELECT COUNT(*) AS total FROM entries WHERE type = :type AND response_language = :lang');
+        $stmt->bindValue(':type', $type, SQLITE3_TEXT);
+        $stmt->bindValue(':lang', $lang, SQLITE3_TEXT);
+    }
+    else {
         $stmt = $db->prepare('SELECT COUNT(*) AS total FROM entries');
     }
 
