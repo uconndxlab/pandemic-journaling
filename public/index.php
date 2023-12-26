@@ -230,7 +230,7 @@ require_once '../inc/functions.php';
                                 </li>
                             <?php endif; ?>
                             <li class="page-item">
-                                <a class="page-link" href="?page=<?php echo $totalPages . $type_text; ?>">
+                                <a class="page-link" href="?page=<?php echo $totalPages . $type_query . $lang_query ; ?>">
                                     <?php echo $totalPages; ?>
                                 </a>
                             </li>
@@ -238,7 +238,7 @@ require_once '../inc/functions.php';
 
                         <?php if ($page < $totalPages) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="?page=<?php echo $page + 1 . $type_text; ?>
+                                <a class="page-link" href="?page=<?php echo $page + 1 . $type_query . $lang_query ?>
 
                                 " aria-label="Next">
                                     <span aria-hidden="true">Next Page</span>
