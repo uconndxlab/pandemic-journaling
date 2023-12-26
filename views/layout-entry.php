@@ -46,7 +46,11 @@
                 </div>
             </div>
             <div class="col-md-3 mx-auto d-flex align-items-center my-4">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage('<?php echo strip_tags($image); ?>')">
+                <a href="#"
+                     data-bs-toggle="modal"
+                     data-bs-target="#imageModal"
+                     onclick="showImage('<?php echo strip_tags($image); ?>')"
+                >
                     <img alt="<?php echo $image; ?>" src="assets/content/images-fe/<?php echo strip_tags($image); ?>" class="img-fluid rounded-start" alt="...">
                 </a>
             </div>
@@ -130,6 +134,8 @@
 <script>
     function showImage(image) {
         document.querySelector('.modal-body').innerHTML = `<img src="assets/content/images-fe/${image}" class="img-fluid rounded-start" alt="...">`;
+        // scroll to top of modal because this app will be in an iframe
+        document.querySelector('.modal-body').scrollIntoView();
     }
 </script>
 
