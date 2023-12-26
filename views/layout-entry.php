@@ -133,8 +133,11 @@
 
 <script>
     function showImage(image) {
+        // make it so the height of the modal is 100vh so that it's always full screen
+        document.querySelector('.modal-dialog').classList.add('modal-fullscreen');
+        
         document.querySelector('.modal-body').innerHTML = `<img src="assets/content/images-fe/${image}" class="img-fluid rounded-start" alt="...">`;
-
     }
+
 </script>
 
