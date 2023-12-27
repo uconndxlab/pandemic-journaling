@@ -1,34 +1,35 @@
 <?php
-function getTotalEntries($type = null, $lang=null) {
+
+function getCount($stmt) {
     // Connect to SQLite database
     $db = new SQLite3('../db/database.db');
+   
+    $queryText = $stmt->getSQL(true);
+    $queryText = str_replace('SELECT *', 'SELECT COUNT(*) as total ', $queryText);
 
-    if ($type && !$lang) {
-        $stmt = $db->prepare('SELECT COUNT(*) AS total FROM entries WHERE type = :type');
-        $stmt->bindValue(':type', $type, SQLITE3_TEXT);
-    } 
-    elseif (!$type && $lang ) {
-        $stmt = $db->prepare('SELECT COUNT(*) AS total FROM entries WHERE response_language = :lang');
-        $stmt->bindValue(':lang', $lang, SQLITE3_TEXT);
-    }
-    elseif ($type && $lang) {
-        $stmt = $db->prepare('SELECT COUNT(*) AS total FROM entries WHERE type = :type AND response_language = :lang');
-        $stmt->bindValue(':type', $type, SQLITE3_TEXT);
-        $stmt->bindValue(':lang', $lang, SQLITE3_TEXT);
-    }
-    else {
-        $stmt = $db->prepare('SELECT COUNT(*) AS total FROM entries');
-    }
+    // remove all references to LIMIT and OFFSET
+    $queryText = preg_replace('/LIMIT\s[0-9]+/i', '', $queryText);
+    $queryText = preg_replace('/OFFSET\s[0-9]+/i', '', $queryText);
 
-    $result = $stmt->execute();
+
+   
+    //die ($queryText);
+
+    $query = $db->prepare($queryText);
+
+    $result = $query->execute();
     $row = $result->fetchArray(SQLITE3_ASSOC);
+    $total = $row['total'];
 
     // Close database connection
     $db->close();
+    return $total;
 
-    return $row['total'];
 }
+
+
 function getEntries(
+    $search_term = null,
     $type = null, 
     $lang=null,
     $page = 1
@@ -42,39 +43,62 @@ function getEntries(
     // Calculate the offset based on the current page
     $offset = ($page - 1) * $entriesPerPage;
 
-    // build the query based on the type and language and page
 
-    if ($type && $lang) {
-        $stmt = $db->prepare('SELECT * FROM entries WHERE type = :type AND response_language = :lang
-        ORDER BY featured_at DESC
-        LIMIT :limit OFFSET :offset');
-        $stmt->bindValue(':type', $type, SQLITE3_TEXT);
-        $stmt->bindValue(':lang', $lang, SQLITE3_TEXT);
-    } elseif ($type && !$lang) {
-        $stmt = $db->prepare('SELECT * FROM entries WHERE type = :type
-        ORDER BY featured_at DESC
-        LIMIT :limit OFFSET :offset');
-        $stmt->bindValue(':type', $type, SQLITE3_TEXT);
-    } elseif (!$type && $lang) {
-        $stmt = $db->prepare('SELECT * FROM entries WHERE response_language = :lang
-        ORDER BY featured_at DESC
-        LIMIT :limit OFFSET :offset');
-        $stmt->bindValue(':lang', $lang, SQLITE3_TEXT);
-    } else {
-        $stmt = $db->prepare('SELECT * FROM entries 
-        ORDER BY featured_at DESC
-        LIMIT :limit OFFSET :offset');
+    $conditions = [];
+
+    if ($search_term) {
+        $conditions[] = "excerpt_or_original_text LIKE :search_term";
     }
+
+    if ($type) {
+        $conditions[] = "type = :type";
+    }
+
+    if ($lang) {
+        $conditions[] = "response_language = :lang";
+    }
+
+    $whereClause = (!empty($conditions))
+        ? 'WHERE ' . implode(' AND ', $conditions)
+        : '';
+
+    $query = "SELECT * FROM entries $whereClause ORDER BY featured_at DESC LIMIT :limit OFFSET :offset"; 
+    $stmt = $db->prepare($query);
+
+
+    if ($search_term) {
+        $stmt->bindValue(':search_term', "%$search_term%", SQLITE3_TEXT);
+    }
+
+    if ($type) {
+        $stmt->bindValue(':type', $type, SQLITE3_TEXT);
+    }
+
+    if ($lang) {
+        $stmt->bindValue(':lang', $lang, SQLITE3_TEXT);
+    }
+
+
+
+
+
 
     $stmt->bindValue(':limit', $entriesPerPage, SQLITE3_INTEGER);
     $stmt->bindValue(':offset', $offset, SQLITE3_INTEGER);
+
+    $total = getCount($stmt);
+
 
     $result = $stmt->execute();
 
     // Fetch results
     $results = [];
+
+    $results['count'] = $total ;
+
+    $results['entries'] = [];
     while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-        $results[] = $row;
+        $results['entries'][] = $row;
     }
 
     // Close database connection
