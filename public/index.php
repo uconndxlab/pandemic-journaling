@@ -19,16 +19,6 @@ require_once '../inc/functions.php';
 <body>
     <!-- sidebar -->
     <div class="container">
-        <div class="row">
-            <div class="col-md-12 mb-3">
-                <h2 class="mb-3 mt-3">Featured Entries</h2>
-                <p>Since May 2020, the Pandemic Journaling Project has given ordinary people a place to chronicle and
-                    preserve their pandemic experiences. In our first phase, PJP-1,
-                    more than 1,800 people in 55 countries have created nearly 27,000 individual journal entries—for
-                    themselves, and for the history books. </p>
-            </div>
-        </div>
-
         <?php
 
         if (isset($_GET['page'])) {
@@ -83,7 +73,7 @@ require_once '../inc/functions.php';
             <div class="col-md-3">
                 <div class="fixed-container">
                     <!-- search form -->
-                    <form action="" autocomplete="off" method="get">
+                    <form hx-get="/" hx-target="#results-wrap" hx-select="#results-wrap" hx-push-url="true" action="" autocomplete="off" method="get">
                         <div class="mb-3">
 
                             <h6 class="form-label mt-4 mb-3" id="formatlabel">Text Search: </h6>
@@ -151,7 +141,7 @@ require_once '../inc/functions.php';
 
             </div>
 
-            <div class="col-md-9">
+            <div id="results-wrap" class="col-md-9">
 
                 <?php if (!isset($_GET['entryID'])) : ?>
                     <h4>Results
@@ -328,6 +318,9 @@ require_once '../inc/functions.php';
         window.onload = sendHeight;
         // You might need to call sendHeight on other events, depending on your content
     </script>
+
+    <!-- htmx JS CDN -->
+    <script src="https://unpkg.com/htmx.org/dist/htmx.min.js"></script>
 
 </body>
 
