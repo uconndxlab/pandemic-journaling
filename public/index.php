@@ -20,14 +20,15 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" crossorigin="anonymous">
     <!-- Font Awesome 5 CDN (required for some components) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://uconn.edu/content/themes/lobo/vendor/uconn/banner/_site/banner.css?ver=6.3.1">
     <link rel="stylesheet" href="assets/css/banner.css">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body>
     <?php if (!$isIframe) : ?>
-        <div id="uconn-banner">
-            <div id="uconn-header-container" class="row-container row-fluid">
+        <div id="uconn-banner" style="background-color:#000E2F;">
+            <div id="uconn-header-container" class="row-container row-fluid container">
                 <div id="home-link-container">
                     <a id="home-link" href="https://uconn.edu/">
                         <span id="wordmark" aria-hidden="true">UConn</span>
@@ -60,28 +61,26 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
                 </div>
             </div>
         </div>
+        <div style="background-color:#000E2F;border-bottom:5px solid #3B833F;">
+<div class="container ps-3">
+<nav class="upper-nav">
+    <a class="parent-title" href="https://cahnr.uconn.edu/">
+        Center for Open Research Resources &amp; Equipment
+    </a>
+</nav>
+<!--Level 1 Title-->
+<nav class="navbar navbar-expand-lg navbar-light shift">
+    <a class="navbar-brand" href="/">
+        Pandemic Journaling Project Featured Entries
+    </a>
+</nav>
+</div>
+</div>
 
-        <nav class="upper-nav">
-            <div class="container">
-                <a class="parent-title" href="https://core.uconn.edu/news"></a>
-            </div>
 
-        </nav>
-
-        <nav class="navbar navbar-expand-lg navbar-light shift">
-            <div class="container">
-                <a class="navbar-brand ps-0" href="/">Pandemic Journaling Project Featured Entries</a>
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-            </div>
-
-        </nav>
     <?php endif; ?>
 
-    <div class="container">
+    <div class="container mt-5">
         <?php
 
         if (isset($_GET['page'])) {
