@@ -107,6 +107,31 @@ function getEntries(
     return $results;
 }
 
+function get_random_image_or_audio_entries($count=5){
+    // Connect to SQLite database
+    $db = new SQLite3('../db/database.db');
+
+    $query = "SELECT * FROM entries WHERE type = 'image' OR type = 'audio' ORDER BY RANDOM() LIMIT :count"; 
+    $stmt = $db->prepare($query);
+
+    $stmt->bindValue(':count', $count, SQLITE3_INTEGER);
+
+    $result = $stmt->execute();
+
+    // Fetch results
+    $results = [];
+
+    $results['entries'] = [];
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        $results['entries'][] = $row;
+    }
+
+    // Close database connection
+    $db->close();
+
+    return $results;
+}
+
 function getEntry($id) {
     // Connect to SQLite database
     $db = new SQLite3('../db/database.db');

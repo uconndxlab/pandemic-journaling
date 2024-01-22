@@ -61,7 +61,7 @@
                         <!-- button that says share as a text link -->
                         <a href="?entryID=<?php echo $id; ?>" target="_blank" class="btn btn-text">
                             <i class="fas fa-share"></i>
-                            Share</a>
+                            Direct Link</a>
                     </small></p>
             </div>
         </div>
@@ -106,7 +106,7 @@
                         <!-- button that says share as a text link -->
                         <a href="?entryID=<?php echo $id; ?>" target="_blank" class="btn btn-text">
                             <i class="fas fa-share"></i>
-                            Share</a>
+                            Direct Link</a>
 
 
 
