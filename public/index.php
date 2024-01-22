@@ -61,10 +61,10 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
                 </div>
             </div>
         </div>
-        <div style="background-color:#000E2F;border-bottom:5px solid #3B833F;">
+        <div style="background-color:#000E2F;border-bottom:5px solid #ffc107;">
 <div class="container ps-3">
 <nav class="upper-nav">
-    <a class="parent-title" href="https://cahnr.uconn.edu/">
+    <a class="parent-title" href="https://core.uconn.edu/">
         Center for Open Research Resources &amp; Equipment
     </a>
 </nav>
