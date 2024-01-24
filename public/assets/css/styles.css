@@ -104,6 +104,13 @@ label {
     border-color: #eee;
 }
 
+#random_featured {
+    /** yellow rounded border */
+    border: 5px solid #F9D423;
+    border-radius: 10px;
+    padding:20px;
+}
+
 /** improve the colors of the pagination buttons */
 
 

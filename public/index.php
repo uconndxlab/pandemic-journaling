@@ -1,6 +1,8 @@
 <?php
 require_once '../inc/functions.php';
 
+$is_filtered = false;
+
 // check to see if it's being loaded in an iframe
 if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] == 'iframe') {
     $isIframe = true;
@@ -62,20 +64,20 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
             </div>
         </div>
         <div style="background-color:#000E2F;border-bottom:5px solid #ffc107;">
-<div class="container ps-3">
-<nav class="upper-nav">
-    <a class="parent-title" href="https://core.uconn.edu/">
-        Center for Open Research Resources &amp; Equipment
-    </a>
-</nav>
-<!--Level 1 Title-->
-<nav class="navbar navbar-expand-lg navbar-light shift">
-    <a class="navbar-brand" href="/">
-        Pandemic Journaling Project Featured Entries
-    </a>
-</nav>
-</div>
-</div>
+            <div class="container ps-3">
+                <nav class="upper-nav">
+                    <a class="parent-title" href="https://core.uconn.edu/">
+                        Center for Open Research Resources &amp; Equipment
+                    </a>
+                </nav>
+                <!--Level 1 Title-->
+                <nav class="navbar navbar-expand-lg navbar-light shift">
+                    <a class="navbar-brand" href="/">
+                        Pandemic Journaling Project Featured Entries
+                    </a>
+                </nav>
+            </div>
+        </div>
 
 
     <?php endif; ?>
@@ -84,12 +86,14 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
         <?php
 
         if (isset($_GET['page'])) {
+            $is_filtered = true;
             $page = $_GET['page'];
         } else {
             $page = 1;
         }
         if (isset($_GET['type'])) {
             $type = $_GET['type'];
+            $is_filtered = true;
             switch ($_GET['type']) {
                 case "text_only":
                     $type_text = "Text Only";
@@ -107,16 +111,21 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
         }
 
         if (isset($_GET['language'])) {
+            $is_filtered = true;
             $lang = $_GET['language'];
         } else {
             $lang = null;
         }
 
         if (isset($_GET['search'])) {
+            $is_filtered = true;
             $search_term = $_GET['search'];
         } else {
             $search_term = null;
         }
+
+  
+
 
 
         // Get the entries for the current page
@@ -127,7 +136,7 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
         // Calculate the total number of pages
         $totalPages = ceil($totalEntries / 24);
 
-
+        $randos = get_random_image_or_audio_entries(1);
 
         ?>
 
@@ -198,15 +207,66 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
 
             <div id="results-wrap" class="col-md-9">
 
+
+                <?php if (!$is_filtered) : ?>
+                    <!-- show a single random entry with a header "Featured" and a "refresh" button -->
+                    <div id="random_featured">
+                        <h4>Featured 
+                            <!-- refresh button -->
+                            <a href="/" hx-get="/" hx-select="#random_featured" hx-target="#random_featured" hx-swap="outerHTML" class="btn btn-text">
+                                <i class="fas fa-sync-alt"></i>
+                                Refresh</a>
+
+                        </h4>
+                        <!-- use the $randos variable to display a single random entry -->
+                        <?php foreach ($randos['entries'] as $rando) :
+                            $id = $rando['id'];
+                            $public = $rando['public'];
+                            $user_public = $rando['user_public'];
+                            $type = $rando['type'];
+                            $subject = $rando['subject'];
+                            $excerpt_or_original_text = $rando['excerpt_or_original_text'];
+                            $excerpt = $rando['excerpt'];
+                            $response_created_at = $rando['response_created_at'];
+                            $featured = $rando['featured'];
+                            $featured_at = $rando['featured_at'];
+                            // cleanup the timestamp of $featured_at
+                            $featured_at = date("F j, Y", strtotime($featured_at));
+                            $response_language = $rando['response_language'];
+                            $audio = $rando['audio'] ?? null;
+                            $image = $rando['image'] ?? null;
+
+                            include '../views/layout-entry.php';
+                            ?>
+                        <?php endforeach; ?>
+
+                    </div>
+                <?php endif; ?>
+          
+
+
                 <?php if (!isset($_GET['entryID'])) : ?>
-                    <h4>Results
+                    <h4 class="mt-5">
+                        <?php if (!$is_filtered) : ?>
+                            All Entries
+                        <?php endif; ?>
+
+                        <?php if ($is_filtered) : ?>
+                           Results
+                        <?php endif; ?>
+
                         <?php if (isset($_GET['type'])) : ?>
                             for <?php echo $type_text; ?>
                         <?php endif; ?>
                     </h4>
 
                     <p>
-                        <?php echo $totalEntries; ?> entries match your search criteria. <br>
+                        <?php echo $totalEntries; ?> entries
+                        <?php if ($is_filtered) : ?>
+                            found 
+                        <?php endif; ?>
+                        
+                        <br>
                         <?php // showing only [lang] entries
                         if ($lang) {
                             switch ($lang) {

@@ -111,7 +111,8 @@ function get_random_image_or_audio_entries($count=5){
     // Connect to SQLite database
     $db = new SQLite3('../db/database.db');
 
-    $query = "SELECT * FROM entries WHERE type = 'image' OR type = 'audio' ORDER BY RANDOM() LIMIT :count"; 
+    $query = "SELECT * FROM entries WHERE type = 'photo_and_text' OR type = 'audio_only' ORDER BY RANDOM() LIMIT :count"; 
+    //die ($query);
     $stmt = $db->prepare($query);
 
     $stmt->bindValue(':count', $count, SQLITE3_INTEGER);
