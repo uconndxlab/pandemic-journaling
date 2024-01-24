@@ -62,7 +62,7 @@ function getEntries(
         ? 'WHERE ' . implode(' AND ', $conditions)
         : '';
 
-    $query = "SELECT * FROM entries $whereClause ORDER BY featured_at DESC LIMIT :limit OFFSET :offset"; 
+    $query = "SELECT * FROM entries $whereClause ORDER BY featured_at ASC LIMIT :limit OFFSET :offset"; 
     $stmt = $db->prepare($query);
 
 
