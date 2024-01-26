@@ -208,7 +208,7 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
             <div id="results-wrap" class="col-md-9">
 
 
-                <?php if (!$is_filtered) : ?>
+                <?php if (!$is_filtered && !isset($_GET['entryID']) ) : ?>
                     <!-- show a single random entry with a header "Featured" and a "refresh" button -->
                     <div id="random_featured">
                         <h4>Featured 
