@@ -18,6 +18,7 @@ a.parent-title {
     font-weight: 500;
     font-size: 24px;
     color: #fff;
+    text-wrap: pretty;
 }
 
 .navbar .navbar-brand:hover {
