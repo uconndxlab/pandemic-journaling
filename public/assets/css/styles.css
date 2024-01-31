@@ -128,3 +128,9 @@ label {
     }
     
 }
+
+
+#results-wrap h6, #random_featured h6 {
+    font-weight: bold;
+    font-style: italic;
+}
