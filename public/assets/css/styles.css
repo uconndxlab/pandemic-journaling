@@ -19,6 +19,16 @@ img {
     border-color: #412D4E;
 }
 
+.btn-secondary {
+    background-color: #F9D423;
+    border-color: #F9D423;
+}
+
+.btn-dark {
+    background-color: #333;
+    border-color: #333;
+}
+
 .custom-purple {
     background-color: #412D4E;
     color: white;
@@ -73,6 +83,10 @@ label {
     cursor: pointer;
 }
 
+img {
+    max-width: 100%!important;
+}
+
 /** improve the colors of the pagination buttons */
 .pagination > li > a,
 .pagination > li > span {
@@ -118,12 +132,11 @@ label {
 @media (max-width: 767px) {
     
     .audio-player {
-        margin-left: 30px;
+
         margin-bottom: 30px;
     }
 
     img {
-        margin-left: 30px;
         margin-bottom:30px;
     }
     
@@ -133,4 +146,50 @@ label {
 #results-wrap h6, #random_featured h6 {
     font-weight: bold;
     font-style: italic;
+}
+
+/** basic #footer styling */
+#footer {
+    background-color: #412D4E;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+#footer a {
+    color: white;
+    text-decoration: none;
+}
+
+#footer a:hover {
+    color: #F9D423;
+}
+
+#footer p {
+    margin-bottom: 0;
+}
+
+/** fix the ul and li styling */
+ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+li {
+    margin-bottom: 10px;
+    margin-left:15px;
+    margin-right:15px;
+
+    display: inline;
+}
+
+/** on a small screen just let the footer links stack */
+@media (max-width: 767px) {
+    #footer ul {
+        padding-left: 0;
+    }
+    #footer li {
+        display: block;
+    }
 }

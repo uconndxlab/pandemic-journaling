@@ -63,6 +63,7 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
                 </div>
             </div>
         </div>
+
         <div style="background-color:#000E2F;border-bottom:5px solid #ffc107;">
             <div class="container ps-3">
                 <nav class="upper-nav">
@@ -79,6 +80,34 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
             </div>
         </div>
 
+        <div style="background-color:#34233a">
+            <!-- to learn more about this project, visit pandemic-journaling-project.uconn.edu -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-warning mt-3" role="alert">
+                            <h4 class="alert-heading">Learn More About the Pandemic Journaling Project</h4>
+                            Over 1,800 people around the world have participated in PJP, contributing entries in text, audio, and image format. Each week during PJP’s first phase, we posted a few entries with participants' permission. Below is a curated sample of those entries, searchable by keyword, format, and/or language.<p>
+                
+                            </p>
+
+                            <p>For more information, visit the project homepage.</p>
+                            
+                            <div class="d-grid gap-2">
+
+                                <a class="btn btn-dark" type="button"
+                                href="https://pandemic-journaling-project.chip.uconn.edu/" target="_blank"
+                                >
+                                    Visit Project Homepage
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
 
     <?php endif; ?>
 
@@ -416,7 +445,32 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
         </div>
     </div>
 
+    <?php if (!$isIframe) : ?>
 
+    <footer id="footer" class="site-footer" role="contentinfo">
+			<div class="container">
+				<ul id="uc-footer-links" class="clearfix text-center">
+											<li>
+							© <a href="http://uconn.edu">University of Connecticut</a>
+						</li>
+						<li>
+							<a href="http://uconn.edu/disclaimers-privacy-copyright/">Disclaimers, Privacy &amp; Copyright</a>
+						</li>
+                        <li>
+							<a href="https://accessibility.uconn.edu/">Accessibility</a>
+						</li>
+										<li>
+						<a href="https://pandemic-journaling-project.chip.uconn.edu/wp-admin/">Webmaster Login</a>
+					</li>
+
+                    <a href="https://pandemic-journaling-project.chip.uconn.edu/contributors-2/" target="_blank">
+                        Contact Information
+                    </a>
+
+									</ul>
+			</div>
+		</footer>
+    <?php endif; ?>
     <!-- Bootstrap 5 JS CDN (required for some components) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script>
