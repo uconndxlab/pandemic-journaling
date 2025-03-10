@@ -269,7 +269,6 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
                                 $extensions = ['jpg', 'JPG', 'jpeg', 'jfif'];
                                 foreach ($extensions as $ext) {
                                     $fullpath = "assets/content/images-fe/{$image}.{$ext}";
-                                    echo $fullpath;
                                     if (file_exists("assets/content/images-fe/{$image}.{$ext}")) {
                                         $image = "{$image}.{$ext}";
                                         break;
@@ -432,8 +431,7 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
                             $extensions = ['jpg', 'JPG', 'jpeg', 'jfif'];
                             foreach ($extensions as $ext) {
                                 $fullpath = "assets/content/images-fe/{$image}.{$ext}";
-                                echo $fullpath;
-                                if (file_exists("assets/content/images-fe/{$image}.{$ext}")) {
+\                                if (file_exists("assets/content/images-fe/{$image}.{$ext}")) {
                                     $image = "{$image}.{$ext}";
                                     break;
                                 }
@@ -466,7 +464,7 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
                         $extensions = ['jpg', 'JPG', 'jpeg', 'jfif'];
                         foreach ($extensions as $ext) {
                             $fullpath = "assets/content/images-fe/{$image}.{$ext}";
-                            echo $fullpath;
+                            
                             if (file_exists("assets/content/images-fe/{$image}.{$ext}")) {
                                 $image = "{$image}.{$ext}";
                                 break;
