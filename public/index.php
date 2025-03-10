@@ -266,9 +266,9 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
                             $image = $rando['image'] ?? null;
 
                             if ($image) {
-                                $extensions = ['jpg', 'JPG', 'jpeg', 'jifif'];
+                                $extensions = ['jpg', 'JPG', 'jpeg', 'jfif'];
                                 foreach ($extensions as $ext) {
-                                    if (file_exists("../path/to/images/{$image}.{$ext}")) {
+                                    if (file_exists("{$image}.{$ext}")) {
                                         $image = "{$image}.{$ext}";
                                         break;
                                     }
@@ -429,7 +429,7 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
                         if ($image) {
                             $extensions = ['jpg', 'JPG', 'jpeg', 'jifif'];
                             foreach ($extensions as $ext) {
-                                if (file_exists("../path/to/images/{$image}.{$ext}")) {
+                                if (file_exists("{$image}.{$ext}")) {
                                     $image = "{$image}.{$ext}";
                                     break;
                                 }
@@ -461,7 +461,7 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
                     if ($image) {
                         $extensions = ['jpg', 'JPG', 'jpeg', 'jifif'];
                         foreach ($extensions as $ext) {
-                            if (file_exists("../path/to/images/{$image}.{$ext}")) {
+                            if (file_exists("{$image}.{$ext}")) {
                                 $image = "{$image}.{$ext}";
                                 break;
                             }
