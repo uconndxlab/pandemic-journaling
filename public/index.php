@@ -268,7 +268,7 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
                             if ($image) {
                                 $extensions = ['jpg', 'JPG', 'jpeg', 'jfif'];
                                 foreach ($extensions as $ext) {
-                                    if (file_exists("{$image}.{$ext}")) {
+                                    if (file_exists("assets/content/images-fe/{$image}.{$ext}")) {
                                         $image = "{$image}.{$ext}";
                                         break;
                                     }
@@ -427,10 +427,10 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
                         $image = $result['image'] ?? null;
 
                         if ($image) {
-                            $extensions = ['jpg', 'JPG', 'jpeg', 'jifif'];
+                            $extensions = ['jpg', 'JPG', 'jpeg', 'jfif'];
                             foreach ($extensions as $ext) {
                                 if (file_exists("{$image}.{$ext}")) {
-                                    $image = "{$image}.{$ext}";
+                                    $image = "assets/content/images-fe/{$image}.{$ext}";
                                     break;
                                 }
                             }
@@ -459,9 +459,9 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
                     $image = $result['image'] ?? null;
 
                     if ($image) {
-                        $extensions = ['jpg', 'JPG', 'jpeg', 'jifif'];
+                        $extensions = ['jpg', 'JPG', 'jpeg', 'jfif'];
                         foreach ($extensions as $ext) {
-                            if (file_exists("{$image}.{$ext}")) {
+                            if (file_exists("assets/content/images-fe/{$image}.{$ext}")) {
                                 $image = "{$image}.{$ext}";
                                 break;
                             }
