@@ -265,6 +265,16 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
                             $audio = $rando['audio'] ?? null;
                             $image = $rando['image'] ?? null;
 
+                            if ($image) {
+                                $extensions = ['jpg', 'JPG', 'jpeg', 'jifif'];
+                                foreach ($extensions as $ext) {
+                                    if (file_exists("../path/to/images/{$image}.{$ext}")) {
+                                        $image = "{$image}.{$ext}";
+                                        break;
+                                    }
+                                }
+                            }
+
                             include '../views/layout-entry.php';
                             ?>
                         <?php endforeach; ?>
@@ -416,6 +426,16 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
                         $audio = $result['audio'] ?? null;
                         $image = $result['image'] ?? null;
 
+                        if ($image) {
+                            $extensions = ['jpg', 'JPG', 'jpeg', 'jifif'];
+                            foreach ($extensions as $ext) {
+                                if (file_exists("../path/to/images/{$image}.{$ext}")) {
+                                    $image = "{$image}.{$ext}";
+                                    break;
+                                }
+                            }
+                        }
+
                         include '../views/layout-entry.php';
 
                     endforeach; ?>
@@ -437,6 +457,16 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
                     $response_language = $result['response_language'];
                     $audio = $result['audio'] ?? null;
                     $image = $result['image'] ?? null;
+
+                    if ($image) {
+                        $extensions = ['jpg', 'JPG', 'jpeg', 'jifif'];
+                        foreach ($extensions as $ext) {
+                            if (file_exists("../path/to/images/{$image}.{$ext}")) {
+                                $image = "{$image}.{$ext}";
+                                break;
+                            }
+                        }
+                    }
 
                     include '../views/layout-entry.php';
 
