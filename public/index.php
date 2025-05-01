@@ -116,12 +116,12 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
 
         if (isset($_GET['page'])) {
             $is_filtered = true;
-            $page = $_GET['page'];
+            $page = htmlspecialchars($_GET['page'], ENT_QUOTES, 'UTF-8');
         } else {
             $page = 1;
         }
         if (isset($_GET['type'])) {
-            $type = $_GET['type'];
+            $type = htmlspecialchars($_GET['type'], ENT_QUOTES, 'UTF-8');
             $is_filtered = true;
             switch ($_GET['type']) {
                 case "text_only":
@@ -141,14 +141,14 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
 
         if (isset($_GET['language'])) {
             $is_filtered = true;
-            $lang = $_GET['language'];
+            $lang = htmlspecialchars($_GET['language'], ENT_QUOTES, 'UTF-8');
         } else {
             $lang = null;
         }
 
         if (isset($_GET['search'])) {
             $is_filtered = true;
-            $search_term = $_GET['search'];
+            $search_term = htmlspecialchars($_GET['search'], ENT_QUOTES, 'UTF-8');
         } else {
             $search_term = null;
         }
@@ -348,7 +348,7 @@ if (isset($_SERVER['HTTP_SEC_FETCH_DEST']) && $_SERVER['HTTP_SEC_FETCH_DEST'] ==
 
                     <p>Page
                         <?php echo $page; ?> of
-                        <?php echo $totalPages; ?>
+                        <?php echo htmlspecialchars($totalPages, ENT_QUOTES, 'UTF-8'); ?>
                     </p>
 
                     <nav aria-label="Page navigation">
